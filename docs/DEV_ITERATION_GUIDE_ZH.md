@@ -141,7 +141,11 @@ node scripts/dev-cli-watch.mjs
 - 确认 `dist/extension.js` 文件的时间戳已更新。
 
 **Q: 为什么首次构建这么慢？**
-- `npm run protos` 需要编译 Go 和 TS 的 Protocol Buffers，这是必要的耗时步骤。后续的增量编译会跳过此步骤，除非 `.proto` 文件发生变化。
+- `npm run protos` 需要编译 Go 和 TS 的 Protocol Buffers，这是必要的耗时步骤。
+
+**Q: `npm run protos` 每次测试都会运行吗？**
+- 使用 `npm test` (全量测试) 时，会自动触发 `npm run protos` 以确保代码生成的正确性。
+- 使用 `npm run test:unit` (单元测试) 时，**不会** 自动触发 `protos` 编译。只要你之前运行过一次 `npm run protos`，后续就可以反复运行单元测试，速度会非常快。
 
 ---
 
