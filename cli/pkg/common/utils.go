@@ -137,7 +137,7 @@ func GetNodeVersion() string {
 }
 
 // RetryOperation performs an operation with retry logic
-func RetryOperation(maxRetries int, timeoutPerAttempt time.Duration, operation func() error) error {
+func RetryOperation(maxRetries int, timeoutPerAttempt time.Duration, retryDelay time.Duration, operation func() error) error {
 	var lastErr error
 
 	for attempt := 1; attempt <= maxRetries; attempt++ {
@@ -163,7 +163,7 @@ func RetryOperation(maxRetries int, timeoutPerAttempt time.Duration, operation f
 
 		// Add delay between attempts (except for the last one)
 		if attempt < maxRetries {
-			time.Sleep(1 * time.Second)
+			time.Sleep(retryDelay)
 		}
 	}
 

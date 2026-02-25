@@ -70,7 +70,7 @@ func (c *ClineClients) StartNewInstance(ctx context.Context) (*common.CoreInstan
 
 	// Use RetryOperation to wait for instance to be ready
 	var instance *common.CoreInstanceInfo
-	err = common.RetryOperation(12, 5*time.Second, func() error {
+	err = common.RetryOperation(60, 5*time.Second, 200*time.Millisecond, func() error {
 		// Check if instance registered itself in SQLite
 		foundInstance, err := c.registry.GetInstance(fullAddress)
 		if err != nil || foundInstance == nil {
@@ -157,7 +157,7 @@ func (c *ClineClients) StartNewInstanceAtPort(ctx context.Context, corePort int)
 
 	// Use RetryOperation to wait for instance to be ready
 	var instance *common.CoreInstanceInfo
-	err = common.RetryOperation(12, 5*time.Second, func() error {
+	err = common.RetryOperation(60, 5*time.Second, 200*time.Millisecond, func() error {
 		// Check if instance registered itself in SQLite
 		foundInstance, err := c.registry.GetInstance(fullAddress)
 		if err != nil || foundInstance == nil {

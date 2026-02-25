@@ -5,7 +5,7 @@ import { log } from "./utils"
 
 export const HOSTBRIDGE_PORT = 26041
 
-export async function waitForHostBridgeReady(timeoutMs = 60000, intervalMs = 500): Promise<string> {
+export async function waitForHostBridgeReady(timeoutMs = 60000, intervalMs = 100): Promise<string> {
 	const address = process.env.HOST_BRIDGE_ADDRESS || `127.0.0.1:${HOSTBRIDGE_PORT}`
 	const client = createHealthClient(address)
 	const deadline = Date.now() + timeoutMs

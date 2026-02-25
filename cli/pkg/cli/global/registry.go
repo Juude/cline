@@ -220,7 +220,7 @@ func (r *ClientRegistry) CleanupStaleInstances(ctx context.Context) error {
 // tryShutdownHostProcess attempts to gracefully shutdown a host process via RPC
 // Best effort, don't throw errors i guess
 func (r *ClientRegistry) tryShutdownHostProcess(hostServiceAddress string) {
-	err := common.RetryOperation(3, 2*time.Second, func() error {
+	err := common.RetryOperation(3, 2*time.Second, 1*time.Second, func() error {
 		// Create context with timeout
 		ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 		defer cancel()
